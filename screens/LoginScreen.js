@@ -7,10 +7,8 @@ import {
     TouchableOpacity
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import {
-    auth,
-    signInWithEmailAndPassword
-} from '../firebase';
+import { auth } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { PrimaryButton, SecondaryButton } from '../components/Buttons';
 import { EmailInput, PasswordInput } from '../components/CustomInputs';
 

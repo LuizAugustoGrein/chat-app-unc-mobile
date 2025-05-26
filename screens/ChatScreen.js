@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import io from 'socket.io-client';
+import { DangerButton } from '../components/Buttons';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const socketEndpoint = process.env.EXPO_PUBLIC_SOCKET_URL;
 
@@ -76,6 +79,13 @@ export default function ChatScreen() {
 
     return (
         <View style={styles.container}>
+            <DangerButton
+                text={'Sair da conta'}
+                action={() => {
+                    signOut(auth);
+                }}
+            />
+
             <Text style={styles.text}>Horário do Servidor</Text>
             <Text style={styles.text}>{time}</Text>
 

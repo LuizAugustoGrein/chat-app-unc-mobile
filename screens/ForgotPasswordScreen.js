@@ -8,10 +8,8 @@ import {
     TouchableOpacity
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import {
-    auth,
-    sendPasswordResetEmail
-} from '../firebase';
+import { auth } from '../firebase';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 export default function ForgotPasswordScreen () {
 

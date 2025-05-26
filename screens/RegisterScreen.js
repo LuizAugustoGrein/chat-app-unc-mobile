@@ -6,10 +6,8 @@ import {
     StyleSheet,
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import {
-    auth,
-    createUserWithEmailAndPassword
-} from '../firebase';
+import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { PrimaryButton, SecondaryButton } from '../components/Buttons';
 import { EmailInput, PasswordInput } from '../components/CustomInputs';
 
@@ -63,9 +61,6 @@ export default function RegisterScreen () {
             <View style={styles.container}>
                 <Text style={styles.title}>Registrar-se</Text>
                 <EmailInput value={email} setValue={setEmail} />
-
-                <EmailInput value={email} setValue={setEmail} />
-
                 
                 <PasswordInput value={password} setValue={setPassword} />
                 {errorMessage &&
