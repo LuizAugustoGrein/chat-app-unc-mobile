@@ -35,7 +35,6 @@ export default function HomeScreen() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [chats, setChats] = useState([]);
-    const [contactsInfo, setContactsInfo] = useState({});
 
     useEffect(() => {
         if (!user?.email) return;
@@ -52,22 +51,6 @@ export default function HomeScreen() {
             }));
 
             setChats(userChats);
-
-            const otherUserEmails = userChats
-                .map(chat => chat.members.find(m => m !== user.email))
-                .filter((v, i, a) => a.indexOf(v) === i);
-
-            const userInfoMap = {};
-            await Promise.all(
-                otherUserEmails.map(async (email) => {
-                    const res = await getDocs(query(collection(db, 'users'), where('__name__', '==', email)));
-                    if (!res.empty) {
-                        userInfoMap[email] = res.docs[0].data();
-                    }
-                })
-            );
-
-            setContactsInfo(userInfoMap);
         });
 
         return () => unsubscribe();
@@ -92,12 +75,7 @@ export default function HomeScreen() {
             return;
         }
 
-        const targetUser = querySnapshot.docs[0];
-        const targetUserId = targetUser.data().email;
-
-        console.log(targetUser.data());
-
-        const [email1, email2] = [user.email, targetUserId].sort();
+        const [email1, email2] = [user.email, email].sort();
         const chatKey = `${email1}_${email2}`;
 
         const chatQuery = query(collection(db, 'chats'), where('chatKey', '==', chatKey));
@@ -149,7 +127,9 @@ export default function HomeScreen() {
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Conversas</Text>
 
-            <TouchableOpacity onPress={() => setIsModalVisible(true)} style={styles.startButton}>
+            <TouchableOpacity
+                onPress={() => setIsModalVisible(true)}
+                style={styles.startButton}>
                 <Text style={styles.startButtonText}>Iniciar Conversa</Text>
             </TouchableOpacity>
 

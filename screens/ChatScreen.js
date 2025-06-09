@@ -70,7 +70,7 @@ export default function ChatScreen() {
                         <Text
                             style={item.from === user.email ? styles.sentMessage : styles.receivedMessage}
                         >
-                            {item.from === user.email ? 'Você' : 'Contato'}: {item.text}
+                            {item.text}
                         </Text>
                     )}
                 />
