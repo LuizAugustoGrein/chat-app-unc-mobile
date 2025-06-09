@@ -75,7 +75,7 @@ export default function HomeScreen() {
             return;
         }
 
-        const [email1, email2] = [user.email, email].sort();
+        const [email1, email2] = [user.email, email.toLowerCase()].sort();
         const chatKey = `${email1}_${email2}`;
 
         const chatQuery = query(collection(db, 'chats'), where('chatKey', '==', chatKey));
